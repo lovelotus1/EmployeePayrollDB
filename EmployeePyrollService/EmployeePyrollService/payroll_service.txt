@@ -1,1 +1,109 @@
-﻿
+﻿create database payroll_service;
+select name from sys.databases
+use payroll_service
+
+EXEC sp_databases
+
+create table employee_payroll
+(
+EmployeeID int identity(1,1) primary key,
+Employeename varchar(150) not null,
+PhoneNumber varchar(10),
+Address varchar(255),
+Department varchar(255),
+Gender varchar(1),
+BasicPay float,
+Deductions float,  
+TaxablePay float,
+TxPay float,
+NetPay float,
+StartDate Date not null,
+City varchar(255),
+Country varchar(255),
+);
+select* from employee_payroll
+
+IF EXISTS (SELECT 1 
+           FROM INFORMATION_SCHEMA.TABLES 
+           WHERE TABLE_TYPE='BASE TABLE' 
+           AND TABLE_NAME='employee_payroll') 
+   SELECT 1 AS res ELSE SELECT 0 AS res;
+
+insert into employee_payroll
+(Employeename,PhoneNumber,Address,Department,Gender,BasicPay,Deductions,TaxablePay,TxPay,NetPay,StartDate,City,Country) 
+values ('Prem','8862813574','Ranchi','Analyst','M', 50000, 4000, 1000, 500, 20000,getdate(),'Ranchi','India')
+insert into employee_payroll
+(Employeename,PhoneNumber,Address,Department,Gender,BasicPay,Deductions,TaxablePay,TxPay,NetPay,StartDate,City,Country) 
+values ('Raj','8762813574','Ranchi','HR','M', 50000, 4000, 1000, 500, 20000,getdate(),'Ranchi','India')
+
+insert into employee_payroll
+(Employeename,PhoneNumber,Address,Department,Gender,BasicPay,Deductions,TaxablePay,TxPay,NetPay,StartDate,City,Country) 
+values ('Anuska','8962813574','Ranchi','Project Manager','F', 50000, 4000, 1000, 500, 20000,getdate(),'Ranchi','India')
+
+insert into employee_payroll
+(Employeename,PhoneNumber,Address,Department,Gender,BasicPay,Deductions,TaxablePay,TxPay,NetPay,StartDate,City,Country) 
+values ('Riya','8955813574','Ranchi','Finance','F', 80000, 7000, 3000, 700, 40000,getdate(),'Ranchi','India')
+
+select * from employee_payroll where Employeename='Prem';
+select * from employee_payroll where startdate between '2022-08-1'and getdate();
+
+alter table payroll_service add Department varchar(255)
+
+
+update employee_payroll set Department='CEO' where Employeename in ('Riya');
+
+select SUM(TaxablePay) from employee_payroll
+
+select MAX(TaxablePay) from employee_payroll
+
+select MIN(TaxablePay) from employee_payroll
+
+select AVG(TaxablePay) from employee_payroll
+
+select Gender from employee_payroll group by Gender;
+
+select SUM(BasicPay) from employee_payroll group by gender
+
+select min(TaxablePay) from employee_payroll where gender='M'
+
+select max(BasicPay) from employee_payroll where gender='M'
+
+select SUM(TaxablePay) from employee_payroll
+
+select MAX(BasicPay) from employee_payroll
+
+select MIN(BasicPay) from employee_payroll
+
+select AVG(BasicPay) from employee_payroll
+
+select Gender from employee_payroll group by Gender;
+
+select SUM(BasicPay) from employee_payroll group by gender
+
+update employee_payroll set BasicPay='70000'
+where Employeename='Prem'
+
+update employee_payroll set BasicPay='60000'
+where Employeename='Raj'
+
+update employee_payroll set BasicPay='90000'
+where Employeename='Riya'
+
+update employee_payroll set PhoneNumber='75000'
+where Employeename='Anuska'
+
+insert into employee_payroll
+(Employeename,PhoneNumber,Address,Department,Gender,BasicPay,Deductions,TaxablePay,TxPay,NetPay,StartDate,City,Country) 
+values ('Piku','7062813584','Ranchi','Chief Audit Executive','M', 150000, 14000, 10000, 5000, 30000,getdate(),'Ranchi','India')
+
+insert into employee_payroll
+(Employeename,PhoneNumber,Address,Department,Gender,BasicPay,Deductions,TaxablePay,TxPay,NetPay,StartDate,City,Country) 
+values ('Sits','8878814574','Ranchi','Chief Procurement Officer','M', 180000, 5000, 2000, 800, 30000,getdate(),'Ranchi','India')
+
+insert into employee_payroll
+(Employeename,PhoneNumber,Address,Department,Gender,BasicPay,Deductions,TaxablePay,TxPay,NetPay,StartDate,City,Country) 
+values ('Somya','8862813574','Ranchi','Analyst','F', 80000, 4000, 1000, 500, 30000,getdate(),'Ranchi','India')
+
+insert into employee_payroll
+(Employeename,PhoneNumber,Address,Department,Gender,BasicPay,Deductions,TaxablePay,TxPay,NetPay,StartDate,City,Country) 
+values ('Shiwani','8962713574','Ranchi','Executive','F', 60000, 5000, 1000, 500, 20000,getdate(),'Ranchi','India')
